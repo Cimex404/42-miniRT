@@ -6,7 +6,7 @@
 /*   By: jgraf <jgraf@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:56:11 by jgraf             #+#    #+#             */
-/*   Updated: 2025/03/14 08:17:36 by jgraf            ###   ########.fr       */
+/*   Updated: 2025/03/14 14:15:14 by jgraf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
 
 static void	check_valid(t_scene_data *data)
 {
-	if ((data->ambient->r < 0 || data->ambient->r > 255)
-		|| (data->ambient->g < 0 || data->ambient->g > 255)
-		|| (data->ambient->b < 0 || data->ambient->b > 255)
+	if ((data->ambient->col_r < 0 || data->ambient->col_r > 255)
+		|| (data->ambient->col_g < 0 || data->ambient->col_g > 255)
+		|| (data->ambient->col_b < 0 || data->ambient->col_b > 255)
 		|| (data->ambient->ratio < 0 || data->ambient->ratio > 1))
 		fatal_error(ERR_DATA, NULL);
 }
@@ -30,9 +30,9 @@ static void	check_valid(t_scene_data *data)
 static void	set_params(t_ambient *ambient, char **param)
 {
 	ambient->ratio = ft_atof(param[1]);
-	ambient->r = ft_atoi(get_split_param(param[2], 0));
-	ambient->g = ft_atoi(get_split_param(param[2], 1));
-	ambient->b = ft_atoi(get_split_param(param[2], 2));
+	ambient->col_r = ft_atoi(get_split_param(param[2], 0));
+	ambient->col_g = ft_atoi(get_split_param(param[2], 1));
+	ambient->col_b = ft_atoi(get_split_param(param[2], 2));
 }
 
 void	parse_ambience(t_scene_data *data, char **param)

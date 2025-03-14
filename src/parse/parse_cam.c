@@ -6,7 +6,7 @@
 /*   By: jgraf <jgraf@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:56:11 by jgraf             #+#    #+#             */
-/*   Updated: 2025/03/14 08:14:22 by jgraf            ###   ########.fr       */
+/*   Updated: 2025/03/14 14:16:03 by jgraf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,20 @@
 static void	check_valid(t_scene_data *data)
 {
 	if ((data->cam->fov < 0 || data->cam->fov > 180)
-		|| (data->cam->vx < 0 || data->cam->vx > 1)
-		|| (data->cam->vy < 0 || data->cam->vy > 1)
-		|| (data->cam->vz < 0 || data->cam->vz > 1))
+		|| (data->cam->vec_x < 0 || data->cam->vec_x > 1)
+		|| (data->cam->vec_y < 0 || data->cam->vec_y > 1)
+		|| (data->cam->vec_z < 0 || data->cam->vec_z > 1))
 		fatal_error(ERR_DATA, NULL);
 }
 
 static void	set_params(t_camera *cam, char **param)
 {
-	cam->x = ft_atoi(get_split_param(param[1], 0));
-	cam->y = ft_atoi(get_split_param(param[1], 1));
-	cam->z = ft_atoi(get_split_param(param[1], 2));
-	cam->vx = ft_atoi(get_split_param(param[2], 0));
-	cam->vy = ft_atoi(get_split_param(param[2], 1));
-	cam->vz = ft_atoi(get_split_param(param[2], 2));
+	cam->pos_x = ft_atoi(get_split_param(param[1], 0));
+	cam->pos_y = ft_atoi(get_split_param(param[1], 1));
+	cam->pos_z = ft_atoi(get_split_param(param[1], 2));
+	cam->vec_x = ft_atoi(get_split_param(param[2], 0));
+	cam->vec_y = ft_atoi(get_split_param(param[2], 1));
+	cam->vec_z = ft_atoi(get_split_param(param[2], 2));
 	cam->fov = ft_atoi(param[3]);
 }
 
