@@ -6,7 +6,7 @@
 /*   By: jgraf <jgraf@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 10:49:10 by jgraf             #+#    #+#             */
-/*   Updated: 2025/03/14 10:52:28 by jgraf            ###   ########.fr       */
+/*   Updated: 2025/03/14 17:25:12 by jgraf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,9 @@ static void	call_element(t_scene_data *data, char *line)
 		parse_plane(data, param);
 	else
 		error(ERR_UNKNOWN, param[0]);
-	free_split(param);
 }
 
-static void	scene_init(t_scene_data *data)
+static void	*scene_init(t_scene_data *data)
 {
 	data->ambient = NULL;
 	data->cam = NULL;
@@ -64,6 +63,9 @@ static void	scene_init(t_scene_data *data)
 	data->assets->sphere_cnt = 0;
 	data->assets->plane_cnt = 0;
 	data->assets->cylinder_cnt = 0;
+	if (!data->assets)
+		return (NULL);
+	return (data);
 }
 
 void	parse_elements(t_scene_data *data, int fd)
@@ -72,20 +74,21 @@ void	parse_elements(t_scene_data *data, int fd)
 	char	*trimmed;
 
 	line = get_next_line(fd);
-	scene_init(data);
+	if (!scene_init(data))
+		fatal_error(ERR_MEMORY, NULL);
 	while (line)
 	{
 		trimmed = ft_strtrim(line, "\n");
 		if (ft_strncmp(line, "\n", 1) == 0)
 		{
-			free(line);
-			free(trimmed);
+			gc_free(line);
+			gc_free(trimmed);
 			line = get_next_line(fd);
 			continue ;
 		}
 		call_element(data, trimmed);
-		free(line);
-		free(trimmed);
+		gc_free(line);
+		gc_free(trimmed);
 		line = get_next_line(fd);
 	}
 	check_valid(data);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmonzon <nmonzon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jgraf <jgraf@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 12:02:10 by nmonzon           #+#    #+#             */
-/*   Updated: 2025/03/13 18:05:29 by nmonzon          ###   ########.fr       */
+/*   Updated: 2025/03/14 16:45:35 by jgraf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*ft_strdup(const char *s1)
 	char	*dup;
 
 	len = ft_strlen(s1);
-	dup = (char *)malloc(len + 1);
+	dup = (char *)gc_malloc(len + 1);
 	if (dup == NULL)
 	{
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: jgraf <jgraf@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:45:39 by jgraf             #+#    #+#             */
-/*   Updated: 2025/03/14 08:27:44 by jgraf            ###   ########.fr       */
+/*   Updated: 2025/03/14 17:14:04 by jgraf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ char	*get_split_param(char *str, int i)
 	char	*trimmed;
 
 	param = ft_split(str, ',');
+	if (!param)
+		fatal_error(ERR_MEMORY, NULL);
 	trimmed = ft_strtrim(param[i], " ");
-	free_split(param);
 	return (trimmed);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgraf <jgraf@student.42heilbronn.de>       +#+  +:+       +#+        */
+/*   By: nmonzon <nmonzon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 18:26:09 by nmonzon           #+#    #+#             */
-/*   Updated: 2025/03/14 08:12:06 by jgraf            ###   ########.fr       */
+/*   Updated: 2025/03/14 16:33:22 by nmonzon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	fatal_error(t_error error, t_window_data *window_data)
 	char	*message;
 
 	message = get_error_message(error);
-	ft_fprintf(2, "%s\n", message);
-	ft_fprintf(2, RED "Exiting miniRT.\n" RESET);
+	ft_fprintf(2, RED "Fatal: %s\n" RESET, message);
+	ft_fprintf(1, "Exiting miniRT.\n");
 	clean_exit(EXIT_FAILURE, window_data);
 }

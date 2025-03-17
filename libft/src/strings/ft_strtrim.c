@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmonzon <nmonzon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jgraf <jgraf@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 12:03:12 by nmonzon           #+#    #+#             */
-/*   Updated: 2024/11/25 16:43:32 by nmonzon          ###   ########.fr       */
+/*   Updated: 2025/03/14 16:43:16 by jgraf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	start = find_start(s1, set);
 	end = find_end(s1, set, start);
 	l = end - start;
-	trimmed_s = (char *)malloc(l + 1);
+	trimmed_s = (char *)gc_malloc(l + 1);
 	if (!trimmed_s)
 		return (NULL);
 	ft_strlcpy(trimmed_s, &s1[start], l + 1);

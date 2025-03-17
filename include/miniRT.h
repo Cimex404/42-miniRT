@@ -6,7 +6,7 @@
 /*   By: jgraf <jgraf@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 11:05:08 by jgraf             #+#    #+#             */
-/*   Updated: 2025/03/14 09:48:02 by jgraf            ###   ########.fr       */
+/*   Updated: 2025/03/17 08:39:33 by jgraf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,11 @@
 # include "../libft/include/libft.h"
 # include "../MLX42/include/MLX42/MLX42.h"
 # include "structs.h"
+# include "maths.h"
 
 //	Defines
-# define WIDTH 1280
-# define HEIGHT 720
+# define	WIDTH 1080
+# define	HEIGHT 720
 
 //	Parsing
 void		parse_elements(t_scene_data *data, int fd);
@@ -36,7 +37,7 @@ int			get_number_of_splits(char *str, char c);
 int			get_number_of_split_elements(char **element);
 
 //	Key Hooks
-void		escape_key(mlx_key_data_t key, void *param);
+void		key_hook(mlx_key_data_t keydata, void* param);
 
 //	Color
 uint32_t	col_rgb(int r, int g, int b, int a);
@@ -46,6 +47,17 @@ int			get_b(uint32_t rgb);
 
 //	Rendering
 void		render_scene(t_scene_data *data);
+void		draw_on_image(t_scene_data *data, mlx_image_t *img);
+t_ray		camera_ray_for_pixel(t_camera *cam, float px, float py);
+void		camera_setup(t_camera *cam);
+
+// Shapes
+bool		plane_intersect(t_plane *plane, t_ray ray, double *t);
+t_vector	plane_normal(t_plane *plane);
+bool		sphere_intersect(t_sphere *sphere, t_ray ray, double *t);
+t_vector	sphere_normal(t_sphere *sphere, t_vector point);
+bool		cylinder_intersect(t_cylinder *cyl, t_ray ray, double *t);
+t_vector	cylinder_normal(t_cylinder *cyl, t_vector point);
 
 //	Logging
 void		printlog(t_log_type log_type, char *message);

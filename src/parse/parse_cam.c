@@ -6,7 +6,7 @@
 /*   By: jgraf <jgraf@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:56:11 by jgraf             #+#    #+#             */
-/*   Updated: 2025/03/14 14:16:03 by jgraf            ###   ########.fr       */
+/*   Updated: 2025/03/14 17:27:14 by jgraf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,13 @@ void	parse_camera(t_scene_data *data, char **param)
 	if (get_number_of_split_elements(param) != 4)
 		fatal_error(ERR_DATA, NULL);
 	if (data->cam == NULL)
+	{
 		data->cam = gc_malloc(sizeof(t_camera));
+		if (!data->cam)
+			fatal_error(ERR_MEMORY, NULL);
+	}
+	else
+		printlog(WARNING, "Camera already exists, overwriting old...");
 	if (get_number_of_splits(param[1], ',') != 3)
 		fatal_error(ERR_DATA, NULL);
 	if (get_number_of_splits(param[2], ',') != 3)

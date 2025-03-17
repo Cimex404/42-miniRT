@@ -6,7 +6,7 @@
 /*   By: nmonzon <nmonzon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:30:38 by jgraf             #+#    #+#             */
-/*   Updated: 2025/03/13 17:13:06 by nmonzon          ###   ########.fr       */
+/*   Updated: 2025/03/14 15:55:25 by nmonzon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ typedef enum e_asset_type
 	ASS_LIGHT,
 	ASS_PLANE,
 	ASS_SPHERE,
-	ASS_CYLINDER
+	ASS_CYLINDER,
+	NO_TYPE
 }	t_asset_type;
 
 typedef struct s_window_data

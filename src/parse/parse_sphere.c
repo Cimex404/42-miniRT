@@ -6,7 +6,7 @@
 /*   By: jgraf <jgraf@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:56:11 by jgraf             #+#    #+#             */
-/*   Updated: 2025/03/14 14:19:42 by jgraf            ###   ########.fr       */
+/*   Updated: 2025/03/14 17:21:51 by jgraf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ static void	add_sphere(t_assets *assets, t_sphere *new_sphere)
 	if (!check_valid(new_sphere))
 		return ;
 	new_node = gc_malloc(sizeof(t_asset_node));
+	if (!new_node)
+		fatal_error(ERR_MEMORY, NULL);
 	new_node->asset_struct = new_sphere;
 	new_node->type = ASS_SPHERE;
 	new_node->next = NULL;
@@ -76,6 +78,8 @@ int	parse_sphere(t_scene_data *data, char **param)
 	if (get_number_of_splits(param[3], ',') != 3)
 		return (printlog(WARNING, "Invalid sphere color."), 0);
 	new_sphere = gc_malloc(sizeof(t_sphere));
+	if (!new_sphere)
+		fatal_error(ERR_MEMORY, NULL);
 	set_params(new_sphere, param);
 	add_sphere(data->assets, new_sphere);
 	return (1);
