@@ -6,7 +6,7 @@
 /*   By: jgraf <jgraf@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:56:11 by jgraf             #+#    #+#             */
-/*   Updated: 2025/03/14 17:27:14 by jgraf            ###   ########.fr       */
+/*   Updated: 2025/03/24 16:29:15 by jgraf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,21 @@
 
 static void	check_valid(t_scene_data *data)
 {
-	if ((data->cam->fov < 0 || data->cam->fov > 180)
-		|| (data->cam->vec_x < 0 || data->cam->vec_x > 1)
-		|| (data->cam->vec_y < 0 || data->cam->vec_y > 1)
-		|| (data->cam->vec_z < 0 || data->cam->vec_z > 1))
+	if (data->cam->fov < 0 || data->cam->fov > 180)
+		fatal_error(ERR_DATA, NULL);
+	if (data->cam->vec_x == 0 && data->cam->vec_y == 0 && data->cam->vec_z == 0)
 		fatal_error(ERR_DATA, NULL);
 }
 
 static void	set_params(t_camera *cam, char **param)
 {
-	cam->pos_x = ft_atoi(get_split_param(param[1], 0));
-	cam->pos_y = ft_atoi(get_split_param(param[1], 1));
-	cam->pos_z = ft_atoi(get_split_param(param[1], 2));
-	cam->vec_x = ft_atoi(get_split_param(param[2], 0));
-	cam->vec_y = ft_atoi(get_split_param(param[2], 1));
-	cam->vec_z = ft_atoi(get_split_param(param[2], 2));
-	cam->fov = ft_atoi(param[3]);
+	cam->pos_x = ft_atof(get_split_param(param[1], 0));
+	cam->pos_y = ft_atof(get_split_param(param[1], 1));
+	cam->pos_z = ft_atof(get_split_param(param[1], 2));
+	cam->vec_x = ft_atof(get_split_param(param[2], 0));
+	cam->vec_y = ft_atof(get_split_param(param[2], 1));
+	cam->vec_z = ft_atof(get_split_param(param[2], 2));
+	cam->fov = ft_atof(param[3]);
 }
 
 void	parse_camera(t_scene_data *data, char **param)
@@ -43,13 +42,9 @@ void	parse_camera(t_scene_data *data, char **param)
 	if (get_number_of_split_elements(param) != 4)
 		fatal_error(ERR_DATA, NULL);
 	if (data->cam == NULL)
-	{
 		data->cam = gc_malloc(sizeof(t_camera));
-		if (!data->cam)
-			fatal_error(ERR_MEMORY, NULL);
-	}
 	else
-		printlog(WARNING, "Camera already exists, overwriting old...");
+		printlog(LOG, "Camera already exists... Replacing camera.");
 	if (get_number_of_splits(param[1], ',') != 3)
 		fatal_error(ERR_DATA, NULL);
 	if (get_number_of_splits(param[2], ',') != 3)

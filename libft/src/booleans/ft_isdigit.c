@@ -17,10 +17,8 @@
 bool	ft_isdigit(int c)
 {
 	if (c == '\0')
-		return (0);
+		return (false);
 	if (c >= 48 && c <= 57)
-	{
-		return (1);
-	}
-	return (0);
+		return (true);
+	return (false);
 }

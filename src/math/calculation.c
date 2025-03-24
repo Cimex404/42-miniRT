@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calculation.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmonzon <nmonzon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jgraf <jgraf@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 16:59:54 by nmonzon           #+#    #+#             */
-/*   Updated: 2025/03/14 17:46:00 by nmonzon          ###   ########.fr       */
+/*   Updated: 2025/03/24 09:02:51 by jgraf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,17 @@ float	fast_inverse_sqrt(float number)
 	bits.f = number;
 	bits.i = 0x5f3759df - (bits.i >> 1);
 	bits.f = bits.f * (1.5F - (x2 * bits.f * bits.f));
-	return bits.f;
+	return (bits.f);
 }
 
-bool	solve_quadratic(double a, double b, double c, double *t0, double *t1)
+bool	solve_quadratic(float a, float b, float c, t_quad *t)
 {
-	double	discriminant;
-	double	temp;
+	float	discriminant;
 
 	discriminant = (b * b) - 4 * (a * c);
 	if (discriminant < 0)
 		return (false);
-	*t0 = (-b - sqrt(discriminant)) / (2.0 * a);
-	*t1 = (-b + sqrt(discriminant)) / (2.0 * a);
-	if (*t0 > *t1)
-	{
-		temp = *t0;
-		*t0 = *t1;
-		*t1 = temp;
-	}
+	t->t0 = (-b - sqrt(discriminant)) / (2.0 * a);
+	t->t1 = (-b + sqrt(discriminant)) / (2.0 * a);
 	return (true);
 }

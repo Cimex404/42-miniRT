@@ -6,7 +6,7 @@
 /*   By: jgraf <jgraf@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 16:44:55 by nmonzon           #+#    #+#             */
-/*   Updated: 2025/03/14 17:18:53 by jgraf            ###   ########.fr       */
+/*   Updated: 2025/03/24 08:33:39 by jgraf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,10 @@ void	gc_collect(void)
 	while (++i < length && current)
 	{
 		next = current->next;
-		free(current->ptr);
-		free(current);
+		if (current->ptr)
+			free(current->ptr);
+		if (current)
+			free(current);
 		current = NULL;
 		current = next;
 	}

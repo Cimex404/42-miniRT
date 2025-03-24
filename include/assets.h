@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   assets.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmonzon <nmonzon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jgraf <jgraf@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:39:14 by nmonzon           #+#    #+#             */
-/*   Updated: 2025/03/14 16:21:10 by nmonzon          ###   ########.fr       */
+/*   Updated: 2025/03/24 14:14:33 by jgraf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ASSETS_H
 # define ASSETS_H
 
+# include "color.h"
+
 // Visual Assets
 typedef struct s_ambient
 {
 	float	ratio;
-	int		col_r;
-	int		col_g;
-	int		col_b;
+	t_color	col;
 }	t_ambient;
 
 typedef struct s_camera
@@ -39,22 +39,19 @@ typedef struct s_light
 	float	pos_y;
 	float	pos_z;
 	float	brightness;
-	int		col_r;
-	int		col_g;
-	int		col_b;
+	t_color	col;
 }	t_light;
 
-
-// Objects
+// Object Assets
 typedef struct s_sphere
 {
 	float	pos_x;
 	float	pos_y;
 	float	pos_z;
 	float	diameter;
-	int		col_r;
-	int		col_g;
-	int		col_b;
+	float	roughness;
+	float	reflect;
+	t_color	col;
 }	t_sphere;
 
 typedef struct s_plane
@@ -65,9 +62,9 @@ typedef struct s_plane
 	float	vec_x;
 	float	vec_y;
 	float	vec_z;
-	int		col_r;
-	int		col_g;
-	int		col_b;
+	float	roughness;
+	float	reflect;
+	t_color	col;
 }	t_plane;
 
 typedef struct s_cylinder
@@ -80,9 +77,9 @@ typedef struct s_cylinder
 	float	vec_z;
 	float	diameter;
 	float	height;
-	int		col_r;
-	int		col_g;
-	int		col_b;
+	float	roughness;
+	float	reflect;
+	t_color	col;
 }	t_cylinder;
 
 #endif

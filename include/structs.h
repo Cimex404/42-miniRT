@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmonzon <nmonzon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jgraf <jgraf@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:30:38 by jgraf             #+#    #+#             */
-/*   Updated: 2025/03/14 15:55:25 by nmonzon          ###   ########.fr       */
+/*   Updated: 2025/03/24 14:14:46 by jgraf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "../MLX42/include/MLX42/MLX42.h"
 # include "assets.h"
+# include "color.h"
 
 typedef enum e_log_type
 {
@@ -56,6 +57,9 @@ typedef struct s_asset_node
 {
 	void				*asset_struct;
 	t_asset_type		type;
+	t_color				col;
+	float				roughness;
+	float				reflect;
 	struct s_asset_node	*next;
 }	t_asset_node;
 
@@ -75,7 +79,7 @@ typedef struct s_scene_data
 	t_ambient		*ambient;
 	t_camera		*cam;
 	t_assets		*assets;
+	uint8_t			samples;
 }				t_scene_data;
-
 
 #endif

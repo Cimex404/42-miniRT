@@ -6,7 +6,7 @@
 /*   By: jgraf <jgraf@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:56:11 by jgraf             #+#    #+#             */
-/*   Updated: 2025/03/14 17:21:52 by jgraf            ###   ########.fr       */
+/*   Updated: 2025/03/21 16:03:17 by jgraf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@
 
 static bool	check_valid(t_light *light)
 {
-	if ((light->col_r < 0 || light->col_r > 255)
-		|| (light->col_g < 0 || light->col_g > 255)
-		|| (light->col_b < 0 || light->col_b > 255)
-		|| (light->brightness < 0 || light->brightness > 1))
+	if ((light->brightness < 0 || light->brightness > 1)
+		|| (light->col.r < 0 || light->col.r > 255)
+		|| (light->col.g < 0 || light->col.g > 255)
+		|| (light->col.b < 0 || light->col.b > 255))
 		return (printlog(WARNING, "Invalid light object parameters"), false);
 	return (true);
 }
@@ -37,8 +37,6 @@ static void	add_light(t_assets *assets, t_light *new_light)
 	if (!check_valid(new_light))
 		return ;
 	new_node = gc_malloc(sizeof(t_asset_node));
-	if (!new_node)
-		fatal_error(ERR_MEMORY, NULL);
 	new_node->asset_struct = new_light;
 	new_node->type = ASS_LIGHT;
 	new_node->next = NULL;
@@ -62,9 +60,9 @@ static void	set_params(t_light *light, char **param)
 	light->pos_y = ft_atof(get_split_param(param[1], 1));
 	light->pos_z = ft_atof(get_split_param(param[1], 2));
 	light->brightness = ft_atof(param[2]);
-	light->col_r = ft_atoi(get_split_param(param[3], 0));
-	light->col_g = ft_atoi(get_split_param(param[3], 1));
-	light->col_b = ft_atoi(get_split_param(param[3], 2));
+	light->col.r = ft_atoi(get_split_param(param[3], 0));
+	light->col.g = ft_atoi(get_split_param(param[3], 1));
+	light->col.b = ft_atoi(get_split_param(param[3], 2));
 }
 
 int	parse_light(t_scene_data *data, char **param)
@@ -78,8 +76,6 @@ int	parse_light(t_scene_data *data, char **param)
 	if (get_number_of_splits(param[3], ',') != 3)
 		return (printlog(WARNING, "Invalid light color."), 0);
 	new_light = gc_malloc(sizeof(t_light));
-	if (!new_light)
-		fatal_error(ERR_MEMORY, NULL);
 	set_params(new_light, param);
 	add_light(data->assets, new_light);
 	return (1);

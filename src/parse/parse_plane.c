@@ -6,7 +6,7 @@
 /*   By: jgraf <jgraf@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:56:11 by jgraf             #+#    #+#             */
-/*   Updated: 2025/03/14 17:21:43 by jgraf            ###   ########.fr       */
+/*   Updated: 2025/03/24 14:55:38 by jgraf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,11 @@ static bool	check_valid(t_plane *plane)
 	if ((plane->vec_x < -1 || plane->vec_x > 1)
 		|| (plane->vec_y < -1 || plane->vec_y > 1)
 		|| (plane->vec_z < -1 || plane->vec_z > 1)
-		|| (plane->col_r < 0 || plane->col_r > 255)
-		|| (plane->col_g < 0 || plane->col_g > 255)
-		|| (plane->col_b < 0 || plane->col_b > 255))
+		|| (plane->roughness < 0 || plane->roughness > 1)
+		|| (plane->reflect < 0 || plane->reflect > 1)
+		|| (plane->col.r < 0 || plane->col.r > 255)
+		|| (plane->col.g < 0 || plane->col.g > 255)
+		|| (plane->col.b < 0 || plane->col.b > 255))
 		return (printlog(WARNING, "Invalid plane object parameters"), false);
 	return (true);
 }
@@ -39,8 +41,6 @@ static void	add_plane(t_assets *assets, t_plane *new_plane)
 	if (!check_valid(new_plane))
 		return ;
 	new_node = gc_malloc(sizeof(t_asset_node));
-	if (!new_node)
-		fatal_error(ERR_MEMORY, NULL);
 	new_node->asset_struct = new_plane;
 	new_node->type = ASS_PLANE;
 	new_node->next = NULL;
@@ -60,22 +60,29 @@ static void	add_plane(t_assets *assets, t_plane *new_plane)
 
 static void	set_params(t_plane *plane, char **param)
 {
+	plane->roughness = DEFAULT_ROUGHNESS;
+	plane->reflect = DEFAULT_REFLECT;
 	plane->pos_x = ft_atof(get_split_param(param[1], 0));
 	plane->pos_y = ft_atof(get_split_param(param[1], 1));
 	plane->pos_z = ft_atof(get_split_param(param[1], 2));
 	plane->vec_x = ft_atof(get_split_param(param[2], 0));
 	plane->vec_y = ft_atof(get_split_param(param[2], 1));
 	plane->vec_z = ft_atof(get_split_param(param[2], 2));
-	plane->col_r = ft_atoi(get_split_param(param[3], 0));
-	plane->col_g = ft_atoi(get_split_param(param[3], 1));
-	plane->col_b = ft_atoi(get_split_param(param[3], 2));
+	plane->col.r = ft_atoi(get_split_param(param[3], 0));
+	plane->col.g = ft_atoi(get_split_param(param[3], 1));
+	plane->col.b = ft_atoi(get_split_param(param[3], 2));
+	if (get_number_of_split_elements(param) >= 5)
+		plane->roughness = ft_atof(param[4]);
+	if (get_number_of_split_elements(param) >= 6)
+		plane->reflect = ft_atof(param[5]);
 }
 
 int	parse_plane(t_scene_data *data, char **param)
 {
 	t_plane	*new_plane;
 
-	if (get_number_of_split_elements(param) != 4)
+	if (get_number_of_split_elements(param) < 5
+		&& get_number_of_split_elements(param) > 6)
 		return (printlog(WARNING, "Invalid plane configuration."), 0);
 	if (get_number_of_splits(param[1], ',') != 3)
 		return (printlog(WARNING, "Invalid plane object position."), 0);
@@ -84,8 +91,6 @@ int	parse_plane(t_scene_data *data, char **param)
 	if (get_number_of_splits(param[3], ',') != 3)
 		return (printlog(WARNING, "Invalid plane color."), 0);
 	new_plane = gc_malloc(sizeof(t_plane));
-	if (!new_plane)
-		fatal_error(ERR_MEMORY, NULL);
 	set_params(new_plane, param);
 	add_plane(data->assets, new_plane);
 	return (1);

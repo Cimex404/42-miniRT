@@ -6,193 +6,78 @@
 /*   By: jgraf <jgraf@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 17:45:06 by nmonzon           #+#    #+#             */
-/*   Updated: 2025/03/17 11:04:03 by jgraf            ###   ########.fr       */
+/*   Updated: 2025/03/24 15:15:11 by jgraf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-static t_vector	get_intersect(t_ray ray, double t)
-{
-	return (vec_add(ray.origin, vec_scale(ray.direction, t)));
-}
-
-static t_light	*get_scene_light(t_scene_data *data)
+static t_asset_node	*find_closest_intersection(t_scene_data *data, t_ray ray,
+	double *closest_t, t_asset_type *closest_type)
 {
 	t_asset_node	*node;
+	t_asset_node	*closest_node;
+	double			t;
 
+	*closest_t = INFINITY;
+	closest_node = NULL;
+	*closest_type = NO_TYPE;
 	node = data->assets->head;
 	while (node)
 	{
-		if (node->type == ASS_LIGHT)
-			return ((t_light *)node->asset_struct);
+		if (((node->type == ASS_PLANE
+					&& plane_hit((t_plane *)node->asset_struct, ray, &t))
+				|| (node->type == ASS_SPHERE
+					&& sphere_hit((t_sphere *)node->asset_struct, ray, &t))
+				|| (node->type == ASS_CYLINDER
+					&& cylinder_hit((t_cylinder *)node->asset_struct, ray, &t)))
+			&& (t < *closest_t))
+		{
+			*closest_t = t;
+			closest_node = node;
+			*closest_type = node->type;
+		}
 		node = node->next;
 	}
-	return (NULL);
+	return (closest_node);
 }
 
-static t_vector	surface_normal(void *obj, t_vector point, t_asset_type type)
+static uint32_t	calculate_lighting(t_render *render, int depth)
 {
-	if (type == ASS_PLANE)
-		return (plane_normal((t_plane *)obj));
-	if (type == ASS_SPHERE)
-		return (sphere_normal((t_sphere *)obj, point));
-	if (type == ASS_CYLINDER)
-		return (cylinder_normal((t_cylinder *)obj, point));
-	return (vec_new(0, 0, 0));
+	t_lighting	lighting;
+	t_vector	light_pos;
+	uint32_t	base_color;
+
+	lighting = init_lighting(render);
+	if (!lighting.light)
+		return (col_rgb(0, 0, 0, 0xFF));
+	light_pos = vec_new(lighting.light->pos_x, lighting.light->pos_y,
+			lighting.light->pos_z);
+	lighting.light_dir = vec_normalize(vec_sub(light_pos, lighting.intersect));
+	lighting.shadow_intensity = shadow_caster(render->data, lighting.intersect,
+			lighting.normal, lighting.light);
+	lighting.ao = ambient_occlusion(render->data, lighting.intersect,
+			lighting.normal);
+	lighting.ambient_light = render->data->ambient->ratio * lighting.ao;
+	lighting.diffuse = calculate_diffuse(&lighting);
+	lighting.specular = calculate_specular(&lighting, render);
+	base_color = compute_color(&lighting, render);
+	base_color = merge_color(base_color,
+			add_reflection(render, lighting, depth),
+			render->closest_node->reflect);
+	return (base_color);
 }
 
-static bool	is_occluded(t_scene_data *data, t_ray shadow_ray)
+uint32_t	trace_ray(t_scene_data *data, t_ray ray, int depth)
 {
-	t_asset_node	*node;
-	double			t;
-
-	node = data->assets->head;
-	while (node)
-	{
-		if (node->type == ASS_PLANE
-			&& plane_intersect((t_plane *)node->asset_struct, shadow_ray, &t)
-			&& t > 0.001f)
-			return (true);
-		if (node->type == ASS_SPHERE
-			&& sphere_intersect((t_sphere *)node->asset_struct, shadow_ray, &t)
-			&& t > 0.001f)
-			return (true);
-		if (node->type == ASS_CYLINDER
-			&& cylinder_intersect((t_cylinder *)node->asset_struct, shadow_ray, &t)
-			&& t > 0.001f)
-			return (true);
-		node = node->next;
-	}
-	return (false);
-}
-
-static uint32_t	ray_hit(t_scene_data *data, t_ray ray)
-{
-	t_asset_node	*node;
-	double			t;
 	double			closest_t;
-	void			*closest_obj;
+	t_asset_node	*closest_node;
 	t_asset_type	closest_type;
-	t_vector		normal;
-	t_vector		intersect;
-	t_light			*light;
-	t_vector		light_dir;
-	t_ray			shadow_ray;
 
-	closest_t = INFINITY;
-	closest_obj = NULL;
-	node = data->assets->head;
-	closest_type = NO_TYPE;
-	while (node)
-	{
-		if (node->type == ASS_PLANE)
-		{
-			if (plane_intersect((t_plane *)node->asset_struct, ray, &t)
-				&& t < closest_t)
-			{
-				closest_t = t;
-				closest_obj = node->asset_struct;
-				closest_type = node->type;
-			}
-		}
-		if (node->type == ASS_SPHERE)
-		{
-			if (sphere_intersect((t_sphere *)node->asset_struct, ray, &t)
-				&& t < closest_t)
-			{
-				closest_t = t;
-				closest_obj = node->asset_struct;
-				closest_type = node->type;
-			}
-		}
-		if (node->type == ASS_CYLINDER)
-		{
-			if (cylinder_intersect((t_cylinder *)node->asset_struct, ray, &t)
-				&& t < closest_t)
-			{
-				closest_t = t;
-				closest_obj = node->asset_struct;
-				closest_type = node->type;
-			}
-		}
-		node = node->next;
-	}
-	if (!closest_obj)
+	closest_node = find_closest_intersection(data, ray,
+			&closest_t, &closest_type);
+	if (!closest_node)
 		return (col_rgb(0, 0, 0, 0xFF));
-	intersect = get_intersect(ray, closest_t);
-	normal = surface_normal(closest_obj, intersect, closest_type);
-	light = get_scene_light(data);
-	if (!light)
-		return (col_rgb(0, 0, 0, 0xFF));
-	light_dir = vec_normalize(vec_sub(
-		vec_new(light->pos_x, light->pos_y, light->pos_z), intersect));
-	shadow_ray.origin = vec_add(intersect, vec_scale(normal, 0.001f));
-	shadow_ray.direction = light_dir;
-	if (is_occluded(data, shadow_ray))
-		return (col_rgb(0, 0, 0, 0xFF));
-	float diffuse = fmax(vec_dot(normal, light_dir), 0.0f);
-	switch (closest_type)
-	{
-		case ASS_PLANE:
-			return (col_rgb(
-				fmin(((t_plane *)closest_obj)->col_r * diffuse * light->brightness + data->ambient->col_r * data->ambient->ratio, 255),
-				fmin(((t_plane *)closest_obj)->col_g * diffuse * light->brightness + data->ambient->col_g * data->ambient->ratio, 255),
-				fmin(((t_plane *)closest_obj)->col_b * diffuse * light->brightness + data->ambient->col_b * data->ambient->ratio, 255),
-				0xFF));
-		case ASS_SPHERE:
-			return (col_rgb(
-				fmin(((t_sphere *)closest_obj)->col_r * diffuse * light->brightness + data->ambient->col_r * data->ambient->ratio, 255),
-				fmin(((t_sphere *)closest_obj)->col_g * diffuse * light->brightness + data->ambient->col_g * data->ambient->ratio, 255),
-				fmin(((t_sphere *)closest_obj)->col_b * diffuse * light->brightness + data->ambient->col_b * data->ambient->ratio, 255),
-				0xFF));
-		case ASS_CYLINDER:
-			return (col_rgb(
-				fmin(((t_cylinder *)closest_obj)->col_r * diffuse * light->brightness + data->ambient->col_r * data->ambient->ratio, 255),
-				fmin(((t_cylinder *)closest_obj)->col_g * diffuse * light->brightness + data->ambient->col_g * data->ambient->ratio, 255),
-				fmin(((t_cylinder *)closest_obj)->col_b * diffuse * light->brightness + data->ambient->col_b * data->ambient->ratio, 255),
-				0xFF));
-		default:
-			return (col_rgb(0, 0, 0, 0xFF));
-	}
-}
-
-void	draw_on_image(t_scene_data *data, mlx_image_t *img)
-{
-	int		i;
-	int		j;
-	t_ray	ray;
-
-	camera_setup(data->cam);
-	i = -1;
-	while (++i < WIDTH)
-	{
-		j = -1;
-		while (++j < HEIGHT)
-		{
-			ray = camera_ray_for_pixel(data->cam, i, j);
-			mlx_put_pixel(img, i, j, ray_hit(data, ray));
-		}
-	}
-}
-
-void	render_scene(t_scene_data *data)
-{
-	t_window_data	window_data;
-
-	window_data.mlx_window = mlx_init(WIDTH, HEIGHT, "miniRT", false);
-	if (!window_data.mlx_window)
-		fatal_error(ERR_WINDOW, &window_data);
-	window_data.mlx_image = mlx_new_image(window_data.mlx_window, WIDTH, HEIGHT);
-	if (!window_data.mlx_image)
-		fatal_error(ERR_IMAGE, &window_data);
-	window_data.image_data = (unsigned char *)window_data.mlx_image->pixels;
-	if (!window_data.image_data)
-		fatal_error(ERR_DATA, &window_data);
-	data->window_data = &window_data;
-	draw_on_image(data, window_data.mlx_image);
-	mlx_image_to_window(window_data.mlx_window, window_data.mlx_image, 0, 0);
-	mlx_key_hook(window_data.mlx_window, &key_hook, data);
-	mlx_loop(window_data.mlx_window);
-	clean_exit(EXIT_SUCCESS, &window_data);
+	return (calculate_lighting(&(t_render){data, ray, closest_node,
+			closest_type, closest_t}, depth));
 }

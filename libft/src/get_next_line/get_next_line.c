@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgraf <jgraf@student.42heilbronn.de>       +#+  +:+       +#+        */
+/*   By: nmonzon <nmonzon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 10:27:08 by nmonzon           #+#    #+#             */
-/*   Updated: 2025/03/14 17:00:15 by jgraf            ###   ########.fr       */
+/*   Updated: 2024/10/28 11:00:58 by nmonzon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*get_next_line(int fd)
 // Clears the buffer if an error happens.
 static char	*clear_buffer(t_buffer *bs)
 {
-	gc_free(bs->buffer);
+	free(bs->buffer);
 	bs->buffer = NULL;
 	return (NULL);
 }
@@ -59,7 +59,7 @@ static char	*clear_buffer(t_buffer *bs)
 static void	set_buffer(size_t *j, int fd, t_buffer *bs)
 {
 	*j = 0;
-	bs->buffer = (char *)gc_malloc(BUFFER_SIZE);
+	bs->buffer = (char *)malloc(BUFFER_SIZE);
 	if (!bs->buffer)
 	{
 		bs->bytes_read = -1;
@@ -88,7 +88,7 @@ static int	process_buffer_loop(char **line, t_buffer *bs, size_t *j, int fd)
 	bs->bytes_read = read(fd, bs->buffer, BUFFER_SIZE);
 	if (bs->bytes_read == (unsigned long)-1)
 	{
-		gc_free(bs->buffer);
+		free(bs->buffer);
 		bs->buffer = NULL;
 		bs->i = 0;
 	}
