@@ -6,7 +6,7 @@
 /*   By: jgraf <jgraf@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 11:05:08 by jgraf             #+#    #+#             */
-/*   Updated: 2025/03/24 16:38:29 by jgraf            ###   ########.fr       */
+/*   Updated: 2025/03/24 18:20:31 by jgraf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@
 # define DEFAULT_ROUGHNESS 0.5
 # define DEFAULT_REFLECT 0.2
 
-//# define WIDTH 320
-//# define HEIGHT 240
-//# define SHDW_SAMPLES 1
-//# define MAX_REFLECT 0
-# define WIDTH 1920
-# define HEIGHT 1080
-# define SHDW_SAMPLES 80
-# define MAX_REFLECT 2
+# define WIDTH 320
+# define HEIGHT 240
+# define SHDW_SAMPLES 1
+# define MAX_REFLECT 0
+//# define WIDTH 1920
+//# define HEIGHT 1080
+//# define SHDW_SAMPLES 80
+//# define MAX_REFLECT 2
 
 //	Parsing
 void		parse_elements(t_scene_data *data, int fd);

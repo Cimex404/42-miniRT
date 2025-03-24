@@ -6,7 +6,7 @@
 /*   By: jgraf <jgraf@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 10:56:02 by jgraf             #+#    #+#             */
-/*   Updated: 2025/03/24 12:55:14 by jgraf            ###   ########.fr       */
+/*   Updated: 2025/03/24 18:16:35 by jgraf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,9 @@ float	shadow_caster(t_scene_data *data, t_vector intersect, t_vector normal,
 	t_vector	light_pos;
 	t_vector	light_dir;
 	t_ray		shadow_ray;
-	float		light_distance;
 
 	light_pos = vec_new(light->pos_x, light->pos_y, light->pos_z);
 	light_dir = vec_normalize(vec_sub(light_pos, intersect));
-	light_distance = vec_length(vec_sub(light_pos, intersect));
 	shadow_ray.origin = vec_add(intersect, vec_scale(normal, 0.001f));
 	shadow_ray.direction = light_dir;
 	if (vec_dot(normal, light_dir) < 0)

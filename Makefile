@@ -6,7 +6,7 @@
 #    By: jgraf <jgraf@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/08 08:59:28 by jgraf             #+#    #+#              #
-#    Updated: 2025/03/24 15:58:17 by jgraf            ###   ########.fr        #
+#    Updated: 2025/03/24 18:15:54 by jgraf            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@
 
 NAME = miniRT
 CC = cc
-FLAGS = -Wall -Wextra -Werror -flto -Ofast -march=native -MMD -MP $(addprefix -I, $(INCLUDES))
+FLAGS = -Wall -Wextra -Werror -Wno-unused-result -flto -Ofast -march=native -MMD -MP $(addprefix -I, $(INCLUDES))
 LDFLAGS = -flto #-fsanitize=address
 LIBFT = ./libft/libft.a
 MLX = ./MLX42/build/libmlx42.a

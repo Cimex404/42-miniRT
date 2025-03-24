@@ -6,7 +6,7 @@
 /*   By: jgraf <jgraf@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 10:49:10 by jgraf             #+#    #+#             */
-/*   Updated: 2025/03/24 16:02:12 by jgraf            ###   ########.fr       */
+/*   Updated: 2025/03/24 18:39:59 by jgraf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ static void	call_element(t_scene_data *data, char *line)
 	if (get_number_of_splits(line, ' ') < 1)
 		return ;
 	param = ft_split(line, ' ');
+	if (!param)
+		fatal_error(ERR_MEMORY, data->window_data);
 	if (!ft_strcmp(param[0], "A"))
 		parse_ambience(data, param);
 	else if (!ft_strcmp(param[0], "C"))
@@ -91,6 +93,8 @@ void	parse_elements(t_scene_data *data, int fd)
 	while (line)
 	{
 		trimmed = ft_strtrim(line, "\n");
+		if (!trimmed)
+			fatal_error(ERR_MEMORY, data->window_data);
 		if (ft_strncmp(line, "\n", 1) == 0)
 		{
 			gc_free(line);
