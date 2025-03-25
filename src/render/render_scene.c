@@ -6,7 +6,7 @@
 /*   By: jgraf <jgraf@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 17:45:06 by nmonzon           #+#    #+#             */
-/*   Updated: 2025/03/24 15:15:11 by jgraf            ###   ########.fr       */
+/*   Updated: 2025/03/25 08:22:21 by jgraf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ static uint32_t	calculate_lighting(t_render *render, int depth)
 	uint32_t	base_color;
 
 	lighting = init_lighting(render);
-	if (!lighting.light)
-		return (col_rgb(0, 0, 0, 0xFF));
 	light_pos = vec_new(lighting.light->pos_x, lighting.light->pos_y,
 			lighting.light->pos_z);
 	lighting.light_dir = vec_normalize(vec_sub(light_pos, lighting.intersect));

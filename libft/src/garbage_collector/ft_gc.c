@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_gc.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgraf <jgraf@student.42heilbronn.de>       +#+  +:+       +#+        */
+/*   By: nmonzon <nmonzon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 16:44:55 by nmonzon           #+#    #+#             */
-/*   Updated: 2025/03/24 08:33:39 by jgraf            ###   ########.fr       */
+/*   Updated: 2025/03/13 18:04:16 by nmonzon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,8 @@ void	gc_collect(void)
 	while (++i < length && current)
 	{
 		next = current->next;
-		if (current->ptr)
-			free(current->ptr);
-		if (current)
-			free(current);
+		free(current->ptr);
+		free(current);
 		current = NULL;
 		current = next;
 	}

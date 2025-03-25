@@ -6,7 +6,7 @@
 #    By: jgraf <jgraf@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/08 08:59:28 by jgraf             #+#    #+#              #
-#    Updated: 2025/03/24 18:15:54 by jgraf            ###   ########.fr        #
+#    Updated: 2025/03/25 10:58:20 by jgraf            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@
 
 NAME = miniRT
 CC = cc
-FLAGS = -Wall -Wextra -Werror -Wno-unused-result -flto -Ofast -march=native -MMD -MP $(addprefix -I, $(INCLUDES))
+FLAGS = -Wall -Wextra -Werror -flto -Ofast -march=native -MMD -MP $(addprefix -I, $(INCLUDES))
 LDFLAGS = -flto #-fsanitize=address
 LIBFT = ./libft/libft.a
 MLX = ./MLX42/build/libmlx42.a
@@ -47,7 +47,7 @@ vpath %.c $(SOURCES)
 ###############                    SOURCE FILES                  ###############
 ################################################################################
 
-PARSE_SRC = $(addprefix parse/, parse_main.c parse_light.c parse_plane.c parse_sphere.c parse_cylinder.c parse_utils.c parse_ambience.c parse_cam.c)
+PARSE_SRC = $(addprefix parse/, parse_main.c parse_light.c dark_light.c parse_plane.c parse_sphere.c parse_cylinder.c parse_utils.c parse_ambience.c parse_cam.c)
 MAINTAINANCE_SRC = $(addprefix maintainance/, logging.c error.c cleanup.c)
 RENDER_SRC = $(addprefix render/, render_scene.c camera.c shadows.c render_utils.c draw_window.c lighting.c reflection.c)
 COLOR_SRC = $(addprefix color/, color.c)

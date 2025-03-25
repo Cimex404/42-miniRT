@@ -6,7 +6,7 @@
 /*   By: jgraf <jgraf@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:56:11 by jgraf             #+#    #+#             */
-/*   Updated: 2025/03/24 14:55:38 by jgraf            ###   ########.fr       */
+/*   Updated: 2025/03/25 11:06:38 by jgraf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ static void	add_plane(t_assets *assets, t_plane *new_plane)
 	if (!check_valid(new_plane))
 		return ;
 	new_node = gc_malloc(sizeof(t_asset_node));
+	if (!new_node)
+		fatal_error(ERR_MEMORY, NULL);
 	new_node->asset_struct = new_plane;
 	new_node->type = ASS_PLANE;
 	new_node->next = NULL;
@@ -91,6 +93,8 @@ int	parse_plane(t_scene_data *data, char **param)
 	if (get_number_of_splits(param[3], ',') != 3)
 		return (printlog(WARNING, "Invalid plane color."), 0);
 	new_plane = gc_malloc(sizeof(t_plane));
+	if (!new_plane)
+		fatal_error(ERR_MEMORY, NULL);
 	set_params(new_plane, param);
 	add_plane(data->assets, new_plane);
 	return (1);

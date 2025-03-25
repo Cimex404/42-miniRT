@@ -6,7 +6,7 @@
 /*   By: jgraf <jgraf@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 10:49:10 by jgraf             #+#    #+#             */
-/*   Updated: 2025/03/24 18:39:59 by jgraf            ###   ########.fr       */
+/*   Updated: 2025/03/25 10:57:20 by jgraf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,10 @@ static void	check_valid(t_scene_data *data)
 		fatal_error(ERR_AMBIENT, NULL);
 	else if (data->cam == NULL)
 		fatal_error(ERR_CAM, NULL);
-	else if (data->assets->light_cnt != 1)
+	else if (data->assets->light_cnt > 1)
 		fatal_error(ERR_LIGHT, NULL);
+	else if (data->assets->light_cnt < 1)
+		create_dark_light(data);
 }
 
 static void	call_element(t_scene_data *data, char *line)
