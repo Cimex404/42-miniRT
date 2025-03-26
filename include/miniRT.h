@@ -6,7 +6,7 @@
 /*   By: jgraf <jgraf@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 11:05:08 by jgraf             #+#    #+#             */
-/*   Updated: 2025/03/26 09:27:57 by jgraf            ###   ########.fr       */
+/*   Updated: 2025/03/26 09:48:57 by jgraf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@
 # include "render.h"
 
 //	Defines
-# define WIDTH 1920
-# define HEIGHT 960
-# define SHDW_SAMPLES 120
+# define WIDTH 960
+# define HEIGHT 544
+# define SHDW_SAMPLES 32
 # define MAX_REFLECT 2
 # define DEFAULT_ROUGHNESS 0.6
 # define DEFAULT_REFLECT 0.2
