@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   calculation.c                                      :+:      :+:    :+:   */
+/*   math_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jgraf <jgraf@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 16:59:54 by nmonzon           #+#    #+#             */
-/*   Updated: 2025/03/24 09:02:51 by jgraf            ###   ########.fr       */
+/*   Updated: 2025/03/26 08:36:43 by jgraf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,19 @@ bool	solve_quadratic(float a, float b, float c, t_quad *t)
 	t->t0 = (-b - sqrt(discriminant)) / (2.0 * a);
 	t->t1 = (-b + sqrt(discriminant)) / (2.0 * a);
 	return (true);
+}
+
+int	ft_rand(void)
+{
+	static unsigned int	*seed;
+
+	if (!seed)
+	{
+		seed = (unsigned int *)gc_malloc(sizeof(unsigned int));
+		if (!seed)
+			return (0);
+		*seed = 42;
+	}
+	*seed = (1103515245 * *seed + 12345) % (1U << 31);
+	return ((int)(*seed & 0x7FFFFFFF));
 }

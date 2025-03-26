@@ -6,7 +6,7 @@
 #    By: jgraf <jgraf@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/08 08:59:28 by jgraf             #+#    #+#              #
-#    Updated: 2025/03/25 10:58:20 by jgraf            ###   ########.fr        #
+#    Updated: 2025/03/26 08:39:22 by jgraf            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,7 @@ MAINTAINANCE_SRC = $(addprefix maintainance/, logging.c error.c cleanup.c)
 RENDER_SRC = $(addprefix render/, render_scene.c camera.c shadows.c render_utils.c draw_window.c lighting.c reflection.c)
 COLOR_SRC = $(addprefix color/, color.c)
 HOOKS_SRC = $(addprefix hooks/, key_input.c translation_input.c rotation_input.c sample_input.c)
-MATH_SRC = $(addprefix math/, vector.c vector2.c calculation.c)
+MATH_SRC = $(addprefix math/, vector.c vector2.c math_utils.c)
 ASSETS_SRC = $(addprefix assets/, plane.c sphere.c cylinder.c cylinder_cap.c)
 
 

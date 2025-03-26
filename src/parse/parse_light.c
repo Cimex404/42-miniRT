@@ -6,7 +6,7 @@
 /*   By: jgraf <jgraf@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:56:11 by jgraf             #+#    #+#             */
-/*   Updated: 2025/03/25 11:06:20 by jgraf            ###   ########.fr       */
+/*   Updated: 2025/03/25 12:23:17 by jgraf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ static void	add_light(t_assets *assets, t_light *new_light)
 			current = current->next;
 		current->next = new_node;
 	}
-	assets->size++;
-	assets->light_cnt++;
+	assets->size ++;
+	assets->light_cnt ++;
 	printlog(LOG, "Light object setup successful.");
 }
 

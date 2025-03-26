@@ -6,7 +6,7 @@
 /*   By: jgraf <jgraf@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 16:50:58 by nmonzon           #+#    #+#             */
-/*   Updated: 2025/03/24 09:52:19 by jgraf            ###   ########.fr       */
+/*   Updated: 2025/03/26 08:39:06 by jgraf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,6 @@ t_vector	vec_random(float min, float max);
 // Math calculations
 float		fast_inverse_sqrt(float number);
 bool		solve_quadratic(float a, float b, float c, t_quad *t);
+int			ft_rand(void);
 
 #endif

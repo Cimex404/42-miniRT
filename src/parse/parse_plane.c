@@ -6,7 +6,7 @@
 /*   By: jgraf <jgraf@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:56:11 by jgraf             #+#    #+#             */
-/*   Updated: 2025/03/25 11:06:38 by jgraf            ###   ########.fr       */
+/*   Updated: 2025/03/25 12:23:18 by jgraf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ static void	add_plane(t_assets *assets, t_plane *new_plane)
 			current = current->next;
 		current->next = new_node;
 	}
-	assets->size++;
-	assets->plane_cnt++;
+	assets->size ++;
+	assets->plane_cnt ++;
 	printlog(LOG, "Plane object setup successful.");
 }
 

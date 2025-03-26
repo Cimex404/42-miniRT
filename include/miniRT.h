@@ -6,7 +6,7 @@
 /*   By: jgraf <jgraf@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 11:05:08 by jgraf             #+#    #+#             */
-/*   Updated: 2025/03/25 10:59:51 by jgraf            ###   ########.fr       */
+/*   Updated: 2025/03/26 09:27:57 by jgraf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,18 @@
 # include "render.h"
 
 //	Defines
-# define WIDTH 960
-# define HEIGHT 544
+# define WIDTH 1920
+# define HEIGHT 960
+# define SHDW_SAMPLES 120
+# define MAX_REFLECT 2
 # define DEFAULT_ROUGHNESS 0.6
 # define DEFAULT_REFLECT 0.2
-# define SHDW_SAMPLES 48
-# define MAX_REFLECT 2
+
+//	This configuration will allow you to move somewhat smoothly
+//# define WIDTH 320
+//# define HEIGHT 240
+//# define SHDW_SAMPLES 1
+//# define MAX_REFLECT 1
 
 //	Parsing
 void		parse_elements(t_scene_data *data, int fd);

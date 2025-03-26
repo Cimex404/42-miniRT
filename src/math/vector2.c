@@ -6,7 +6,7 @@
 /*   By: jgraf <jgraf@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 08:51:48 by jgraf             #+#    #+#             */
-/*   Updated: 2025/03/24 08:54:00 by jgraf            ###   ########.fr       */
+/*   Updated: 2025/03/26 08:45:39 by jgraf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_vector	vec_normalize(t_vector v)
 
 static float	rand_range(float min, float max)
 {
-	return (min + (max - min) * ((float)rand() / RAND_MAX));
+	return (min + (max - min) * ((float)ft_rand() / RAND_MAX));
 }
 
 t_vector	vec_random(float min, float max)
