@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmonzon <nmonzon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jgraf <jgraf@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 10:55:15 by jgraf             #+#    #+#             */
-/*   Updated: 2025/03/31 13:05:19 by nmonzon          ###   ########.fr       */
+/*   Updated: 2025/03/31 17:36:01 by jgraf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,17 +50,14 @@ bool	is_occluded(t_scene_data *data, t_ray shadow_ray, float light_distance)
 	node = data->assets->head;
 	while (node)
 	{
-		if (node->type == AST_PLANE
-			&& (plane_hit((t_plane *)node->asset_struct, shadow_ray, &t)
-				&& t > 0.001f && t < light_distance))
+		if (node->type == AST_PLANE && (plane_hit((t_plane *)node->asset_struct, shadow_ray, &t)
+			&& t > 0.001f && t < light_distance))
 			return (true);
-		else if (node->type == AST_SPHERE
-			&& (sphere_hit((t_sphere *)node->asset_struct, shadow_ray, &t)
-				&& t > 0.001f && t < light_distance))
+		else if (node->type == AST_SPHERE && (sphere_hit((t_sphere *)node->asset_struct, shadow_ray, &t)
+			&& t > 0.001f && t < light_distance))
 			return (true);
-		else if (node->type == AST_CYLINDER
-			&& (cylinder_hit((t_cylinder *)node->asset_struct, shadow_ray, &t)
-				&& t > 0.001f && t < light_distance))
+		else if (node->type == AST_CYLINDER && (cylinder_hit((t_cylinder *)node->asset_struct, shadow_ray, &t)
+			&& t > 0.001f && t < light_distance))
 			return (true);
 		node = node->next;
 	}

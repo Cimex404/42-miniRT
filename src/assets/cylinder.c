@@ -6,7 +6,7 @@
 /*   By: jgraf <jgraf@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 16:07:15 by nmonzon           #+#    #+#             */
-/*   Updated: 2025/03/24 12:54:29 by jgraf            ###   ########.fr       */
+/*   Updated: 2025/03/31 17:29:19 by jgraf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,8 @@ static bool	cylinder_body(t_cylinder *cyl, t_ray ray, t_quad *quad, double *t)
 
 	center = vec_new(cyl->pos_x, cyl->pos_y, cyl->pos_z);
 	axis = vec_normalize(vec_new(cyl->vec_x, cyl->vec_y, cyl->vec_z));
-	h0 = vec_dot(vec_sub(vec_add(ray.origin,
-					vec_scale(ray.direction, quad->t0)), center), axis);
-	h1 = vec_dot(vec_sub(vec_add(ray.origin,
-					vec_scale(ray.direction, quad->t1)), center), axis);
+	h0 = vec_dot(vec_sub(vec_add(ray.origin, vec_scale(ray.direction, quad->t0)), center), axis);
+	h1 = vec_dot(vec_sub(vec_add(ray.origin, vec_scale(ray.direction, quad->t1)), center), axis);
 	if ((h0 < 0 || h0 > cyl->height) && (h1 < 0 || h1 > cyl->height))
 		return (false);
 	if (h0 < 0 || h0 > cyl->height)

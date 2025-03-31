@@ -6,7 +6,7 @@
 /*   By: jgraf <jgraf@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 11:49:30 by jgraf             #+#    #+#             */
-/*   Updated: 2025/03/24 16:01:24 by jgraf            ###   ########.fr       */
+/*   Updated: 2025/03/31 17:33:41 by jgraf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,7 @@ void	render_scene(t_scene_data *data)
 	window_data.mlx_window = mlx_init(WIDTH, HEIGHT, "miniRT", false);
 	if (!window_data.mlx_window)
 		fatal_error(ERR_WINDOW, &window_data);
-	window_data.mlx_image
-		= mlx_new_image(window_data.mlx_window, WIDTH, HEIGHT);
+	window_data.mlx_image = mlx_new_image(window_data.mlx_window, WIDTH, HEIGHT);
 	if (!window_data.mlx_image)
 		fatal_error(ERR_IMAGE, &window_data);
 	window_data.image_data = (unsigned char *)window_data.mlx_image->pixels;

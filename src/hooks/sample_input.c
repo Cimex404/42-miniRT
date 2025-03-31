@@ -6,7 +6,7 @@
 /*   By: jgraf <jgraf@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 09:37:57 by jgraf             #+#    #+#             */
-/*   Updated: 2025/03/24 09:39:26 by jgraf            ###   ########.fr       */
+/*   Updated: 2025/03/31 17:31:04 by jgraf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,12 @@ bool	sample_keys(mlx_key_data_t keydata, t_scene_data *data)
 	short	m;
 
 	m = 16;
-	if (keydata.key == MLX_KEY_KP_ADD
-		&& (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
+	if (keydata.key == MLX_KEY_KP_ADD && (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
 	{
 		if (data->samples < 112)
 			data->samples += m;
 	}
-	else if (keydata.key == MLX_KEY_KP_SUBTRACT
-		&& (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
+	else if (keydata.key == MLX_KEY_KP_SUBTRACT && (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
 	{
 		if (data->samples > 1)
 			data->samples -= m;

@@ -6,7 +6,7 @@
 /*   By: jgraf <jgraf@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 10:24:36 by jgraf             #+#    #+#             */
-/*   Updated: 2025/03/31 17:18:16 by jgraf            ###   ########.fr       */
+/*   Updated: 2025/03/31 17:29:03 by jgraf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ static bool	intersect_bottom_cap(t_cylinder *cyl, t_ray ray, double *t)
 
 	center = vec_new(cyl->pos_x, cyl->pos_y, cyl->pos_z);
 	axis = vec_normalize(vec_new(cyl->vec_x, cyl->vec_y, cyl->vec_z));
-	cap = vec_dot(vec_sub(center, ray.origin), axis)
-		/ vec_dot(ray.direction, axis);
+	cap = vec_dot(vec_sub(center, ray.origin), axis) / vec_dot(ray.direction, axis);
 	if (cap > 0)
 	{
 		hit = vec_add(ray.origin, vec_scale(ray.direction, cap));

@@ -6,7 +6,7 @@
 /*   By: jgraf <jgraf@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:56:11 by jgraf             #+#    #+#             */
-/*   Updated: 2025/03/31 17:10:26 by jgraf            ###   ########.fr       */
+/*   Updated: 2025/03/31 17:33:07 by jgraf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,7 @@ int	parse_sphere(t_scene_data *data, char **param)
 {
 	t_sphere	*new_sphere;
 
-	if (get_number_of_split_elements(param) < 4
-		|| get_number_of_split_elements(param) > 6)
+	if (get_number_of_split_elements(param) < 4 || get_number_of_split_elements(param) > 6)
 		return (printlog(WARNING, "Invalid sphere configuration."), 0);
 	if (get_number_of_splits(param[1], ',') != 3)
 		return (printlog(WARNING, "Invalid sphere object position."), 0);
