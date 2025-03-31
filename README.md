@@ -6,6 +6,9 @@
 <p>
 	This was a parter-project, so thanks to <a href="https://github.com/N03l-MG" target="_blank">Noel</a> for working on this project with me! :D
 </p>
+<p>
+	<img src="https://github.com/Cimex404/42-miniRT/blob/master/og_test_scene.png" alt="og_test_scene" width="960">
+</p>
 
 ##	Setup
 Simply copy and paste this command into your terminal and the program will automatically set itself up:
@@ -83,5 +86,7 @@ cy   10,30,-30       .5,1,.5       10         20    255,255,0
   - [Roughness]
   - [Reflectiveness]
  
-##	Example images
-Working on that ...
+##	Cake
+<p>
+	<img src="https://github.com/Cimex404/42-miniRT/blob/master/cake.png" alt="cake" width="960">
+</p>
