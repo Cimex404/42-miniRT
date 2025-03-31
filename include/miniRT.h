@@ -6,7 +6,7 @@
 /*   By: jgraf <jgraf@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 11:05:08 by jgraf             #+#    #+#             */
-/*   Updated: 2025/03/26 09:48:57 by jgraf            ###   ########.fr       */
+/*   Updated: 2025/03/31 16:50:15 by jgraf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,18 @@
 //	Defines
 # define WIDTH 960
 # define HEIGHT 544
-# define SHDW_SAMPLES 32
+# define SHDW_SAMPLES 48
 # define MAX_REFLECT 2
-# define DEFAULT_ROUGHNESS 0.6
-# define DEFAULT_REFLECT 0.2
 
 //	This configuration will allow you to move somewhat smoothly
-//# define WIDTH 320
-//# define HEIGHT 240
-//# define SHDW_SAMPLES 1
-//# define MAX_REFLECT 1
+// # define WIDTH 320
+// # define HEIGHT 240
+// # define SHDW_SAMPLES 1
+// # define MAX_REFLECT 1
+
+//	Default values for optional parameters
+# define DEFAULT_ROUGHNESS 0.6
+# define DEFAULT_REFLECT 0.2
 
 //	Parsing
 void		parse_elements(t_scene_data *data, int fd);

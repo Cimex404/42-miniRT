@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_main.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgraf <jgraf@student.42heilbronn.de>       +#+  +:+       +#+        */
+/*   By: nmonzon <nmonzon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 10:49:10 by jgraf             #+#    #+#             */
-/*   Updated: 2025/03/25 10:57:20 by jgraf            ###   ########.fr       */
+/*   Updated: 2025/03/31 13:04:17 by nmonzon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static void	pass_color_to_parent(t_assets *assets)
 	current = assets->head;
 	while (current)
 	{
-		if (current->type == ASS_LIGHT)
+		if (current->type == AST_LIGHT)
 			current->col = ((t_light *)current->asset_struct)->col;
 		else
 			assign_properties(current, current->asset_struct, current->type);

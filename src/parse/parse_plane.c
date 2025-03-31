@@ -6,7 +6,7 @@
 /*   By: jgraf <jgraf@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:56:11 by jgraf             #+#    #+#             */
-/*   Updated: 2025/03/25 12:23:18 by jgraf            ###   ########.fr       */
+/*   Updated: 2025/03/31 17:08:33 by jgraf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	add_plane(t_assets *assets, t_plane *new_plane)
 	if (!new_node)
 		fatal_error(ERR_MEMORY, NULL);
 	new_node->asset_struct = new_plane;
-	new_node->type = ASS_PLANE;
+	new_node->type = AST_PLANE;
 	new_node->next = NULL;
 	if (assets->head == NULL)
 		assets->head = new_node;
@@ -83,8 +83,8 @@ int	parse_plane(t_scene_data *data, char **param)
 {
 	t_plane	*new_plane;
 
-	if (get_number_of_split_elements(param) < 5
-		&& get_number_of_split_elements(param) > 6)
+	if (get_number_of_split_elements(param) < 4
+		|| get_number_of_split_elements(param) > 6)
 		return (printlog(WARNING, "Invalid plane configuration."), 0);
 	if (get_number_of_splits(param[1], ',') != 3)
 		return (printlog(WARNING, "Invalid plane object position."), 0);

@@ -6,7 +6,7 @@
 /*   By: jgraf <jgraf@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:56:11 by jgraf             #+#    #+#             */
-/*   Updated: 2025/03/25 11:05:33 by jgraf            ###   ########.fr       */
+/*   Updated: 2025/03/31 16:58:58 by jgraf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	parse_camera(t_scene_data *data, char **param)
 			fatal_error(ERR_MEMORY, NULL);
 	}
 	else
-		printlog(LOG, "Camera already exists... Replacing camera.");
+		printlog(WARNING, "Camera already exists... Replacing camera.");
 	if (get_number_of_splits(param[1], ',') != 3)
 		fatal_error(ERR_DATA, NULL);
 	if (get_number_of_splits(param[2], ',') != 3)

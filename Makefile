@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jgraf <jgraf@student.42heilbronn.de>       +#+  +:+       +#+         #
+#    By: nmonzon <nmonzon@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/08 08:59:28 by jgraf             #+#    #+#              #
-#    Updated: 2025/03/26 08:39:22 by jgraf            ###   ########.fr        #
+#    Updated: 2025/03/31 12:33:53 by nmonzon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,7 @@ vpath %.c $(SOURCES)
 ################################################################################
 
 PARSE_SRC = $(addprefix parse/, parse_main.c parse_light.c dark_light.c parse_plane.c parse_sphere.c parse_cylinder.c parse_utils.c parse_ambience.c parse_cam.c)
-MAINTAINANCE_SRC = $(addprefix maintainance/, logging.c error.c cleanup.c)
+UTILS_SRC = $(addprefix utils/, logging.c error.c cleanup.c)
 RENDER_SRC = $(addprefix render/, render_scene.c camera.c shadows.c render_utils.c draw_window.c lighting.c reflection.c)
 COLOR_SRC = $(addprefix color/, color.c)
 HOOKS_SRC = $(addprefix hooks/, key_input.c translation_input.c rotation_input.c sample_input.c)
@@ -56,13 +56,7 @@ MATH_SRC = $(addprefix math/, vector.c vector2.c math_utils.c)
 ASSETS_SRC = $(addprefix assets/, plane.c sphere.c cylinder.c cylinder_cap.c)
 
 
-SRCS = $(addprefix src/, main.c $(PARSE_SRC) $(MAINTAINANCE_SRC) $(RENDER_SRC) $(COLOR_SRC) $(HOOKS_SRC) $(MATH_SRC) $(ASSETS_SRC))
-
-#SRCS = color/color.c \
-	   hooks/key_input.c hooks/translation_input.c hooks/rotation_input.c hooks/sample_input.c \
-	   math/vector.c math/vector2.c math/calculation.c \
-	   assets/plane.c assets/sphere.c assets/cylinder.c assets/cylinder_cap.c
-
+SRCS = $(addprefix src/, main.c $(PARSE_SRC) $(UTILS_SRC) $(RENDER_SRC) $(COLOR_SRC) $(HOOKS_SRC) $(MATH_SRC) $(ASSETS_SRC))
 OBJ = $(addprefix $(OBJECTS)/, $(SRCS:.c=.o))
 
 ################################################################################

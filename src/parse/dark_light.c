@@ -6,7 +6,7 @@
 /*   By: jgraf <jgraf@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:56:11 by jgraf             #+#    #+#             */
-/*   Updated: 2025/03/25 11:17:13 by jgraf            ###   ########.fr       */
+/*   Updated: 2025/03/31 17:01:28 by jgraf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*	This is were we create a light that has a luminance of 0.
 *	This allows for an undeclared light object that exists, but has no
-*	effect on the scene. This holds the rendering and lighting code clean.
+*	effect on the scene. This keeps the rendering and lighting code clean.
 */
 
 static void	add_light(t_assets *assets, t_light *new_light)
@@ -26,7 +26,7 @@ static void	add_light(t_assets *assets, t_light *new_light)
 	if (!new_node)
 		fatal_error(ERR_MEMORY, NULL);
 	new_node->asset_struct = new_light;
-	new_node->type = ASS_LIGHT;
+	new_node->type = AST_LIGHT;
 	new_node->next = NULL;
 	if (assets->head == NULL)
 		assets->head = new_node;
@@ -39,7 +39,7 @@ static void	add_light(t_assets *assets, t_light *new_light)
 	}
 	assets->size ++;
 	assets->light_cnt ++;
-	printlog(LOG, "No Light found... Resorting to Darklight.");
+	printlog(WARNING, "No Light found... Resorting to Darklight.");
 }
 
 static void	set_params(t_light *light)

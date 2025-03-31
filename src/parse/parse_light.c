@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_light.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgraf <jgraf@student.42heilbronn.de>       +#+  +:+       +#+        */
+/*   By: nmonzon <nmonzon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:56:11 by jgraf             #+#    #+#             */
-/*   Updated: 2025/03/25 12:23:17 by jgraf            ###   ########.fr       */
+/*   Updated: 2025/03/31 13:04:31 by nmonzon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	add_light(t_assets *assets, t_light *new_light)
 	if (!new_node)
 		fatal_error(ERR_MEMORY, NULL);
 	new_node->asset_struct = new_light;
-	new_node->type = ASS_LIGHT;
+	new_node->type = AST_LIGHT;
 	new_node->next = NULL;
 	if (assets->head == NULL)
 		assets->head = new_node;

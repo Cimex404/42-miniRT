@@ -6,7 +6,7 @@
 /*   By: jgraf <jgraf@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 18:26:09 by nmonzon           #+#    #+#             */
-/*   Updated: 2025/03/25 10:52:29 by jgraf            ###   ########.fr       */
+/*   Updated: 2025/03/31 17:17:35 by jgraf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	fatal_error(t_error error, t_window_data *window_data)
 	char	*message;
 
 	message = get_error_message(error);
-	ft_fprintf(2, RED "Fatal: %s\n" RESET, message);
-	ft_fprintf(1, "Exiting miniRT.\n");
+	ft_fprintf(2, RED "Fatal %s\n" RESET, message);
+	ft_fprintf(1, YELLOW "Exiting miniRT....\n" RESET);
 	clean_exit(EXIT_FAILURE, window_data);
 }

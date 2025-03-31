@@ -6,17 +6,17 @@
 /*   By: jgraf <jgraf@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:27:01 by jgraf             #+#    #+#             */
-/*   Updated: 2025/03/21 16:07:05 by jgraf            ###   ########.fr       */
+/*   Updated: 2025/03/31 08:47:50 by jgraf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
 /*	These are functions for color creation or modification.
-*	col_rgb()	creates a color from the given input.
-*	get_r()		returns the value of the red channel of an existing color.
-*	get_g()		returns the value of the green channel of an existing color.
-*	get_b()		returns the value of the blue channel of an existing color.
+*	col_rgb()		creates a color from the given input.
+*	get_r()			returns the value of the red channel of an existing color.
+*	get_g()			returns the value of the green channel of an existing color.
+*	get_b()			returns the value of the blue channel of an existing color.
 *	merge_color()	returns a mixture of two colors based on a value.
 */
 
@@ -42,9 +42,9 @@ int	get_b(uint32_t rgba)
 
 uint32_t	merge_color(uint32_t col1, uint32_t col2, float val)
 {
-	int	r;
-	int	g;
-	int	b;
+	uint8_t	r;
+	uint8_t	g;
+	uint8_t	b;
 
 	r = get_r(col1) + (get_r(col2) - get_r(col1)) * val;
 	g = get_g(col1) + (get_g(col2) - get_g(col1)) * val;

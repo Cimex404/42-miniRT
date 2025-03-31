@@ -6,7 +6,7 @@
 /*   By: jgraf <jgraf@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:56:11 by jgraf             #+#    #+#             */
-/*   Updated: 2025/03/25 11:05:58 by jgraf            ###   ########.fr       */
+/*   Updated: 2025/03/31 17:10:43 by jgraf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	add_cylinder(t_assets *assets, t_cylinder *new_cylinder)
 	if (!new_node)
 		fatal_error(ERR_MEMORY, NULL);
 	new_node->asset_struct = new_cylinder;
-	new_node->type = ASS_CYLINDER;
+	new_node->type = AST_CYLINDER;
 	new_node->next = NULL;
 	if (assets->head == NULL)
 		assets->head = new_node;
@@ -87,8 +87,8 @@ int	parse_cylinder(t_scene_data *data, char **param)
 {
 	t_cylinder	*new_cylinder;
 
-	if (get_number_of_split_elements(param) < 7
-		&& get_number_of_split_elements(param) > 8)
+	if (get_number_of_split_elements(param) < 6
+		|| get_number_of_split_elements(param) > 8)
 		return (printlog(WARNING, "Invalid cylinder configuration."), 0);
 	if (get_number_of_splits(param[1], ',') != 3)
 		return (printlog(WARNING, "Invalid cylinder object position."), 0);

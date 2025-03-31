@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_scene.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgraf <jgraf@student.42heilbronn.de>       +#+  +:+       +#+        */
+/*   By: nmonzon <nmonzon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 17:45:06 by nmonzon           #+#    #+#             */
-/*   Updated: 2025/03/25 08:22:21 by jgraf            ###   ########.fr       */
+/*   Updated: 2025/03/31 12:45:20 by nmonzon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ static t_asset_node	*find_closest_intersection(t_scene_data *data, t_ray ray,
 	node = data->assets->head;
 	while (node)
 	{
-		if (((node->type == ASS_PLANE
+		if (((node->type == AST_PLANE
 					&& plane_hit((t_plane *)node->asset_struct, ray, &t))
-				|| (node->type == ASS_SPHERE
+				|| (node->type == AST_SPHERE
 					&& sphere_hit((t_sphere *)node->asset_struct, ray, &t))
-				|| (node->type == ASS_CYLINDER
+				|| (node->type == AST_CYLINDER
 					&& cylinder_hit((t_cylinder *)node->asset_struct, ray, &t)))
 			&& (t < *closest_t))
 		{

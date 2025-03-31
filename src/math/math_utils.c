@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   math_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgraf <jgraf@student.42heilbronn.de>       +#+  +:+       +#+        */
+/*   By: nmonzon <nmonzon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 16:59:54 by nmonzon           #+#    #+#             */
-/*   Updated: 2025/03/26 08:36:43 by jgraf            ###   ########.fr       */
+/*   Updated: 2025/03/31 12:43:07 by nmonzon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,5 @@ int	ft_rand(void)
 		*seed = 42;
 	}
 	*seed = (1103515245 * *seed + 12345) % (1U << 31);
-	return ((int)(*seed & 0x7FFFFFFF));
+	return ((int)(*seed & RAND_MAX));
 }
