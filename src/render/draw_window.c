@@ -6,7 +6,7 @@
 /*   By: jgraf <jgraf@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 11:49:30 by jgraf             #+#    #+#             */
-/*   Updated: 2025/04/01 18:23:52 by jgraf            ###   ########.fr       */
+/*   Updated: 2025/04/02 15:21:58 by jgraf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	draw_frame(t_scene_data *data, mlx_image_t *img)
 			mlx_put_pixel(img, j, i, trace_ray(data, ray, 0));
 			j ++;
 		}
-		if (i % 25 == 0)
-			printf(MAGENTA "Log: Processing...\t%.1f%%\n" RESET, ((float)(i*100)/(HEIGHT*100))*100);
+		if (i % 100 == 0)
+			printf(MAGENTA "Log: Processing...\t%.1f%%\n" RESET, ((float)(i*100) / (HEIGHT*100)) * 100);
 		i ++;
 	}
 	printlog(LOG, "Processing...\t100.0%\n");

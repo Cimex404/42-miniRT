@@ -6,7 +6,7 @@
 /*   By: jgraf <jgraf@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 17:45:06 by nmonzon           #+#    #+#             */
-/*   Updated: 2025/03/31 17:35:33 by jgraf            ###   ########.fr       */
+/*   Updated: 2025/04/02 15:12:45 by jgraf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,10 @@ uint32_t	trace_ray(t_scene_data *data, t_ray ray, int depth)
 
 	closest_node = find_closest_intersection(data, ray, &closest_t, &closest_type);
 	if (!closest_node)
-		return (col_rgb(0, 0, 0, 0xFF));
+		return (col_rgb(
+			data->ambient->col.r * data->ambient->ratio,
+			data->ambient->col.g * data->ambient->ratio,
+			data->ambient->col.b * data->ambient->ratio,
+			0xFF));
 	return (calculate_lighting(&(t_render){data, ray, closest_node, closest_type, closest_t}, depth));
 }
